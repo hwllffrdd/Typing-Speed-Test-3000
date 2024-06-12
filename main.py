@@ -1,18 +1,35 @@
 from tkinter import *
 import time
 import random
+import sys
+import os
+
+def resource_path(relative_path):
+    """ Get the absolute path to the resource, works for dev and for PyInstaller """
+    try:
+        base_path = sys._MEIPASS
+    except AttributeError:
+        base_path = os.path.dirname(os.path.abspath(__file__))
+
+    return os.path.join(base_path, relative_path)
+
+def load_texts():
+    texts_path = resource_path("texts.txt")
+    print(f"Trying to load file from: {texts_path}")
+    if os.path.exists(texts_path):
+        print(f"File {texts_path} exists.")
+    else:
+        print(f"File {texts_path} does NOT exist.")
+    with open(texts_path, 'r') as file:
+        data = file.read().strip().split("\n\n")
+        return data
+
+if __name__ == "__main__":
+    base_path = os.path.dirname(resource_path("texts.txt"))
 
 
-def load_texts(file_path):
-    with open(file_path, "r") as file:
-        texts = file.read().strip().split("\n\n")
-    return texts
-
-
-texts = load_texts("texts.txt")
-
+texts = load_texts()
 template = random.choice(texts)
-
 start_time = None
 
 
@@ -79,7 +96,7 @@ def change():
 
 
 window = Tk()
-window.config(padx=100, pady=50, bg="#EEEEEE")
+window.config(padx=50, pady=15, bg="#EEEEEE")
 window.resizable(False, False)
 window.title("Typing Speed Test 3000")
 
@@ -87,7 +104,7 @@ app_label = Label(window, text="Typing Speed Test 3000", fg="#686D76", bg="#EEEE
 app_label.grid(column=0, row=0, pady=20)
 
 canvas = Canvas(width=400, height=260, bg="#EEEEEE", highlightthickness=0)
-img = PhotoImage(file="image.png")
+img = PhotoImage(file=resource_path("image.png"))
 canvas.create_image(200, 130, image=img)
 canvas.grid(column=0, row=1)
 
