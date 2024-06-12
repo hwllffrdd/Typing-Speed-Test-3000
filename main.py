@@ -86,9 +86,9 @@ window.title("Typing Speed Test 3000")
 app_label = Label(window, text="Typing Speed Test 3000", fg="#686D76", bg="#EEEEEE", font=("Verdana", 22, "bold"))
 app_label.grid(column=0, row=0, pady=20)
 
-canvas = Canvas(width=400, height=229, bg="#EEEEEE", highlightthickness=0)
+canvas = Canvas(width=400, height=260, bg="#EEEEEE", highlightthickness=0)
 img = PhotoImage(file="image.png")
-canvas.create_image(200, 115, image=img)
+canvas.create_image(200, 130, image=img)
 canvas.grid(column=0, row=1)
 
 template_text = Label(window, text=template, fg="#373A40", bg="#EEEEEE", font=("Verdana", 12, "bold"), wraplength=400, justify="left")
